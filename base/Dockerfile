@@ -1,7 +1,5 @@
 FROM ubuntu:18.04
 
-# tag as mvwestendorp/spark-base:2.4.4-hadoop2.7
-# copy of https://github.com/big-data-europe/docker-spark/tree/master/base but with ubuntu base
 MAINTAINER Mathijs van Westendorp <mvwestendorp@gmail.com>
 
 ENV ENABLE_INIT_DAEMON true
@@ -15,19 +13,15 @@ COPY /wait-for-step.sh /
 COPY /execute-step.sh /
 COPY /finish-step.sh /
 
-#COPY bde-spark.css /css/org/apache/spark/ui/static/timeline-view.css
-
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y openjdk-8-jre wget python3-pip r-base\
+
       && chmod +x *.sh \
       && wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
       && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
-      && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
-      #&& cd /css \
-      #&& jar uf /spark/jars/spark-core_2.11-${SPARK_VERSION}.jar org/apache/spark/ui/static/timeline-view.css \
-      && cd /
+      && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
 
 #Give permission to execute scripts
 RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-step.sh

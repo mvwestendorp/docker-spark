@@ -1,7 +1,6 @@
 FROM mvwestendorp/spark-base:2.4.4-hadoop2.7
 
-MAINTAINER Erika Pauwels <erika.pauwels@tenforce.com>
-MAINTAINER Gezim Sejdiu <g.sejdiu@gmail.com>
+MAINTAINER Mathijs van Westendorp <mvwestendorp@gmail.com>
 
 COPY worker.sh /
 
