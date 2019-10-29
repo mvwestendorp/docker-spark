@@ -25,7 +25,7 @@ RUN apt-get install -y openjdk-8-jre wget python3-pip r-base\
 
 #Give permission to execute scripts
 RUN chmod +x /wait-for-step.sh && chmod +x /execute-step.sh && chmod +x /finish-step.sh
-
+RUN pip3 install tensorflow plotly plotly_express
 RUN R -e "install.packages(c('knitr', 'ggplot2', 'devtools', 'mplot', 'googleVis', 'sqldf', 'glmnet', 'pROC', 'data.table', 'caret', 'wordcloud'), repos = 'http://cran.us.r-project.org')"
 
 # Fix the value of PYTHONHASHSEED
